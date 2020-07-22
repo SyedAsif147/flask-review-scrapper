@@ -1,0 +1,23 @@
+div#content {
+    display: none;
+    }
+
+/* div #loading {
+    width: 35px !important;
+    height: 35px !important;
+    display: none !important;
+    background: url("/static/media/loading_image.gif") no-repeat !important;
+    cursor: wait !important;
+    } */
+
+
+div#loading {
+    top: 200 px;
+    margin: auto;
+    position: absolute;
+    z-index: 1000;
+    width: 160px;
+    height: 24px;
+    background: url("/static/media/loading_image.gif") no-repeat;
+    cursor: wait ;
+    }

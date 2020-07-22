@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block new_content %}
+<div id="loading"><img src="/static/media/loading_image.gif" class="imgcenter">
+<div class="container jumbotron ">
+  <h1>Your Scrapped data is being generated...</h1><br>
+  <h3>This may take a few minutes...</h3>
+</div>
+</div>
+
+<div class="container">
+<div id="content">
+<form method="POST">
+  {{ form.csrf_token }}
+  {{ form.state }}
+  <br>
+  <div class="container row">
+    <input class="btn btn-outline-success" type="submit" name="state_select" value="Select State"></input>
+  </div>
+  <br>
+  {{ form.city }}
+  <br>
+  <div class="container row">
+    <input class="btn btn-outline-success" type="submit" name="city_select" value="Select City"></input>
+  </div>
+  <br>
+  {{ form.locality }}
+  <br>
+  <div class="container row">
+    <input class="btn btn-outline-success" type="submit" value="Submit" onclick="loading()"></input>
+  </div>
+</form>
+</div>
+</div>
+<style>
+    .imgcenter {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+    #loading {
+    width: 1600px;
+    height: 20px !important;
+    display: none;
+    cursor: wait;
+    margin: 0px;
+    }
+</style>
+<script type="text/javascript">// <![CDATA[
+  function loading(){
+      $("#loading").show();
+      $("#content").hide();       
+  }
+// ]]></script>
+{% endblock %}
+
