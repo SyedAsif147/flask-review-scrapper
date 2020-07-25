@@ -18,7 +18,7 @@ app = Flask(__name__)
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-app.config['SECRET_KEY'] = 'something_jkjfnksjf'
+app.config['SECRET_KEY'] = 'sakjnfksmfoknfijanfkanmokgmokmfgow76y892inf3ih2982i'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+os.path.join(basedir,'details.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'], echo=False)
@@ -64,6 +64,13 @@ def login_required(f):
 
 # Review Request
 
+header={"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
+    "Accept-Encoding": "*",
+    "Connection": "keep-alive",
+    "Accept": "application/json", 
+    "user-key": "API_KEY"
+    }
+
 def scrapper_links(link):
     links=[]
     with requests.Session() as s:
@@ -72,7 +79,7 @@ def scrapper_links(link):
         i=1
         while i<nums:
 
-            url=s.get("{}?page={}&sort=best&nearby=0".format(link,i),headers={"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36"})
+            url=s.get("{}?page={}&sort=best&nearby=0".format(link,i),headers=header)
             url_content=url.content
             soup=BeautifulSoup(url_content,"html.parser")
             div=soup.find("div",attrs={"class":"col-l-4 mtop pagination-number"})
@@ -99,7 +106,7 @@ def scrapper_output(links):
             while(t!=0):
             
                 #print(i,j)
-                url=s.get(i+"/reviews?page={}&sort=dd&filter=reviews-dd".format(j),headers={"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36"})
+                url=s.get(i+"/reviews?page={}&sort=dd&filter=reviews-dd".format(j),headers=header)
                 url_content=url.content
                 soup=BeautifulSoup(url_content,"html.parser")
                 # review=soup.find_all()
